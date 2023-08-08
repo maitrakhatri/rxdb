@@ -10,20 +10,20 @@ function App() {
   const [loadedContent, setLoadedContent] = useState<Content>();
   const [latestRev, setLatestRev] = useState<string>();
 
-  // const getData = async (id: number) => {
-  //   const foundDocuments = await fileversedb.collabdocs
-  //     .find({
-  //       selector: {
-  //         id: {
-  //           $eq: id,
-  //         },
-  //       },
-  //       sort: [{ timestamp: "desc" }],
-  //     })
-  //     .exec();
+  /* const getData = async (id: number) => {
+    const foundDocuments = await fileversedb.collabdocs
+      .find({
+        selector: {
+          id: {
+            $eq: id,
+          },
+        },
+        sort: [{ timestamp: "desc" }],
+      })
+      .exec();
 
-  //   setLoadedContent(foundDocuments[0]._data.content);
-  // };
+    setLoadedContent(foundDocuments[0]._data.content);
+  }; */
 
   const createDatabase = async () => {
     try {
@@ -55,13 +55,16 @@ function App() {
     <div className="App">
       <input type="number" onChange={(e) => setId(Number(e.target.value))} />
 
-      {/* <button onClick={() => getData(id)}>Get Data</button> */}
+      {/* <button onClick={() => getData(id)}>Get Data from rxdb</button> */}
 
-      <button onClick={() => loadDatafromCouch()}>Load Data</button>
+      <button onClick={() => loadDatafromCouch()}>
+        Load Data from Couchdb
+      </button>
 
       <button onClick={() => createDatabase()}>Create database</button>
 
-      {loadedContent && latestRev && (
+      {latestRev && !loadedContent && <Tiptap id={id} rev={latestRev} />}
+      {latestRev && loadedContent && (
         <Tiptap id={id} rev={latestRev} loadedContent={loadedContent} />
       )}
     </div>
