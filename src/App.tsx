@@ -39,7 +39,7 @@ function App() {
 
       <button onClick={() => createDocument()}>Create document</button>
 
-      <button onClick={() => getData(id)}>Get Data from rxdb</button>
+      <button onClick={() => getData(id)}>Load data</button>
 
       {showEditor && <Tiptap id={id} loadedContent={loadedContent} />}
     </div>
